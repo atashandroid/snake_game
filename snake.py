@@ -5,6 +5,7 @@ DOWN = 270
 LEFT = 180
 RIGHT = 0
 
+
 class Snake:
     def __init__(self):
         self.snake = []
@@ -19,13 +20,20 @@ class Snake:
             self.snake[i].color("brown")
             self.snake[i].goto(i * 20 * -1, 0)
 
-
     def move(self):
         for seg_num in range(len(self.snake) - 1, 0, -1):
             new_x = self.snake[seg_num - 1].xcor()
             new_y = self.snake[seg_num - 1].ycor()
             self.snake[seg_num].goto(new_x, new_y)
         self.snake[0].forward(20)
+
+    def reset(self):
+        for seg in self.snake:
+            seg.goto(1000, 1000)
+        self.snake.clear()
+        self.snake_make()
+        self.snake[0].color('red')
+        self.head = self.snake[0]
 
     def up(self):
         if self.snake[0].heading() != DOWN:
